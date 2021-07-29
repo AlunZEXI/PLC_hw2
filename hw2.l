@@ -1,7 +1,11 @@
 //token counting code:
 
 //initialize the counting number n
-%{ int n = 0 ;}%
+%{
+#include<stdio.h>
+#include<string.h>
+int n = 0;
+}%
 
 // rules
 
@@ -21,3 +25,19 @@
 // integers adding & print current info 
 [0-9]+ {n++; printf(“\t integers : %s”, yytext);}
 %%
+
+int totalTokens(){}//to wrap the above rule
+int main()
+{
+	//to get file input
+	FILE *fp;
+	char fileName[100];
+	printf("Please input your file name: \n");
+  //count the number of tokens
+	scanf("%s",fileName);
+	fp = fopen(fileName,"r");
+	yyin = fp;
+	yylex();
+	printf("\n The overall number of the tokens: %d\n", n);
+	return 0;
+}
